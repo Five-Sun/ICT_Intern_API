@@ -1,4 +1,5 @@
 const express = require('express');
+var fs = require('fs');
 //모듈 추출
 
 const app = express();
