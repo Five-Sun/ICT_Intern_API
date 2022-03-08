@@ -6,6 +6,7 @@
         <style>
             body {
                 background-color: #eeeeee;
+                color: #636e72;
             }
             a {
                 color: #636e72;
@@ -17,14 +18,32 @@
                 width: 1080px;
                 margin: auto;
                 display: grid;
+                grid-template-rows: 20vh 60vh 20vh;
+                row-gap: 10px;
+                border: 1px red;
+            }
+            .header {
+                border: 1px solid red;
+                font-size: 2em;
+                text-align: center;
+                margin: 0;
+            }
+            .content {
+                border: 1px solid red;
+
+            }
+            .footer {
+                border: 1px solid red;
             }
         </style>
     </head>
     <body>
         <div class="main-container">
-            <div class="header">1</div>
+            <div class="header">
+                <h1>API Exercise</h1>
+            </div>
             <div class="content">2</div>
-            <div class="footer">3</div>
+            <div class="footer">참고자료</div>
         </div>
     </body>
 </html>
