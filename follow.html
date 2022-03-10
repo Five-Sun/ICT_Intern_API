@@ -1,23 +1,112 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <title>Following Youtube</title>
-        <meta http-equiv="Contetn-Type" content="text/html; charset=utf-8" />
-        <style>
-            body {
-                background-color: #eeeeee;
-                color: #636e72;
-            }
-            a {
-                color: #636e72;
-                text-decoration: none;
-            }
-            a:visited {
-                color: #636e72;
-            }
-        </style>
-    </head>
-    <body>
-        hi
-    </body>
+
+<head>
+    <title>Following Youtube</title>
+    <meta http-equiv="Contetn-Type" content="text/html; charset=utf-8" />
+    <style>
+        body {
+            background-color: #eeeeee;
+            color: #636e72;
+        }
+
+        a {
+            color: #636e72;
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: #636e72;
+        }
+
+        .main-container {
+            width: 1080px;
+            margin: auto;
+            display: grid;
+            grid-template-rows: 20vh 60vh 20vh;
+            row-gap: 1em;
+            border: 1px red;
+        }
+
+        .header {
+            border: 1px solid red;
+            font-size: 2em;
+            text-align: center;
+            margin: 0;
+        }
+
+        .content {
+            border: 1px solid red;
+
+        }
+
+        .footer {
+            border: 1px solid red;
+        }
+
+        .search-box {
+            text-align: center;
+            margin: auto;
+            border: 1px solid red;
+        }
+
+        #bookName {
+            width: 20vw;
+            border-radius: 1em;
+            border: 1px solid black;
+            margin:  1em 0;
+            padding: 1em;
+        }
+        #search {
+            border-radius: 1em;
+            border: 1px solid black;
+            margin:  1em 0;
+            padding: 1em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="header">
+            <a href="/">
+                <h1>OPEN API Exercise</h1>
+            </a>
+        </div>
+        <div class="content">
+            <div class="search-box">
+                <input id="bookName" value="" type="text">
+                <button id="search">Search</button>
+            </div>
+            <div id="thumbnail"></div>
+            <div id="title"></div>
+            <div id="link"></div> 
+        </div>
+        <div class="footer">
+            참고자료
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous">
+        </script>
+    <script>
+        $(document).ready(function () {
+            $("#search").click(function () {
+                $.ajax({
+                    method: "GET",
+                    url: "https://dapi.kakao.com/v3/search/book?target=title",
+                    data: { query: $("#bookName").val() },
+                    headers: { Authorization: "KakaoAK 3705e65d3da8505380bbd2d83e4a085f" }
+                })
+                    .done(function (msg) {
+                        console.log(msg.documents[0].title);
+                        console.log(msg.documents[0].thumbnail);
+                        $("#title").html("<strong>" + msg.documents[0].title + "</strong>");
+                        $("#thumbnail").html("<img src='" + msg.documents[0].thumbnail + "'/>");
+                        $("#link").html("<a href='" + msg.documents[0].url + "' target='_blank'>" + "<strong>자세히 보기</strong>" + "</a>");
+                    });
+            });
+        });
+    </script>
+</body>
 </html>
