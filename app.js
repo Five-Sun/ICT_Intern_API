@@ -21,4 +21,4 @@ app.get('/kakao', function(request, response) {
     fs.readFile('kakao.html', function(error, data) {
         response.send(data.toString());
     });
-});
+}); //Kakao Open API 활용
