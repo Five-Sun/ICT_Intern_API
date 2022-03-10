@@ -1,66 +1,80 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Open API Exercise</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <style>
-            body {
-                background-color: #eeeeee;
-                color: #636e72;
-            }
-            a {
-                color: #636e72;
-                text-decoration: none;
-            }
-            a:visited {
-                color: #636e72;
-            }
-            .main-container {
-                width: 1080px;
-                margin: auto;
-                display: grid;
-                grid-template-rows: 20vh 60vh 20vh;
-                row-gap: 1em;
-                border: 1px red;
-            }
-            .header {
-                border: 1px solid red;
-                font-size: 2em;
-                text-align: center;
-                margin: 0;
-            }
-            .content {
-                border: 1px solid red;
 
-            }
-            .footer {
-                border: 1px solid red;
-            }
-            .box {
-                display: grid;
-                grid-template-rows: 3fr 3fr 3fr;
-                row-gap: 1em;
-                border: 1px solid black;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="main-container">
-            <div class="header">
-                <a href="/"><h1>OPEN API Exercise</h1></a>
-            </div>
-            <div class="content">
-                <div class="box">
-                    <a href="/follow">Youtube 무작정 따라해보기.</a> 
-                </div>
-                <div class="box">
-                    KAKAO OPEN API.
-                </div>
-                <div class="box">
-                    Youtube OPEN API.
-                </div>
-            </div>
-            <div class="footer">참고자료</div>
+<head>
+    <title>Open API Exercise</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+        body {
+            background-color: #eeeeee;
+            color: #636e72;
+        }
+
+        a {
+            color: #636e72;
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: #636e72;
+        }
+
+        .main-container {
+            width: 1080px;
+            margin: auto;
+            display: grid;
+            grid-template-rows: 20vh 60vh 20vh;
+            row-gap: 1em;
+            border: 1px red;
+        }
+
+        .header {
+            border: 1px solid red;
+            font-size: 2em;
+            text-align: center;
+            margin: 0;
+        }
+
+        .content {
+            border: 1px solid red;
+
+        }
+
+        .footer {
+            border: 1px solid red;
+        }
+
+        .box {
+            display: grid;
+            grid-template-rows: 3fr 3fr 3fr;
+            row-gap: 1em;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="header">
+            <a href="/">
+                <h1>OPEN API Exercise</h1>
+            </a>
         </div>
-    </body>
+        <div class="content">
+            <div class="box">
+                <a href="/follow">Youtube 무작정 따라해보기.</a>
+            </div>
+            <div class="box">
+                KAKAO OPEN API.
+            </div>
+            <div class="box">
+                Youtube OPEN API.
+            </div>
+        </div>
+        <div class="footer">
+            참고자료
+        </div>
+    </div>
+</body>
+
 </html>
