@@ -17,8 +17,8 @@ app.get('/', function(request, response) {
     });
 }); //메인 화면
 
-app.get('/follow', function(request, response) {
-    fs.readFile('follow.html', function(error, data) {
+app.get('/kakao', function(request, response) {
+    fs.readFile('kakao.html', function(error, data) {
         response.send(data.toString());
     });
 });
