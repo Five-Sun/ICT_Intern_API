@@ -57,11 +57,33 @@
             margin:  1em 0;
             padding: 1em;
         }
+
         #search {
             border-radius: 1em;
             border: 1px solid black;
             margin:  1em 0;
             padding: 1em;
+        }
+
+        #thumbnail {
+            border: 1px solid black;
+            float: right;
+            width: 540px;
+            height: 500px;
+        }
+        img {
+            width: 540px;
+            height: 500px;
+        }
+        #title {
+            border: 1px solid blue;
+            float: left;
+            width: 500px;
+        }
+        #link {
+            border: 1px solid blue;
+            float: left;
+            width: 500px;
         }
     </style>
 </head>
@@ -79,8 +101,8 @@
                 <button id="search">Search</button>
             </div>
             <div id="thumbnail"></div>
-            <div id="title"></div>
-            <div id="link"></div> 
+            <span id="title"></span>
+            <span id="link"></span> 
         </div>
         <div class="footer">
             참고자료
