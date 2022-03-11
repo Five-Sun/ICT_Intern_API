@@ -4,6 +4,7 @@
 <head>
     <title>Open API Exercise</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <style>
         body {
             background-color: #eeeeee;
@@ -20,17 +21,17 @@
         }
 
         .main-container {
-            width: 1080px;
+            width: 50vw;
             margin: auto;
             display: grid;
-            grid-template-rows: 20vh 60vh 20vh;
-            row-gap: 1em;
+            grid-template-rows: 20vh 50vh 20vh;
+            row-gap: 1vh;
             border: 1px red;
         }
 
         .header {
             border: 1px solid red;
-            font-size: 2em;
+            font-size: 2vw;
             text-align: center;
             margin: 0;
         }
@@ -42,13 +43,16 @@
 
         .footer {
             border: 1px solid red;
+            font-size: 1vw;
         }
 
         .box {
             display: grid;
             grid-template-rows: 3fr 3fr 3fr;
-            row-gap: 1em;
+            row-gap: 1vh;
+            margin: auto;
             border: 1px solid black;
+            font-size: 1vw;
         }
     </style>
 </head>
@@ -65,7 +69,7 @@
                 <a href="/kakao">KAKAO OPEN API Exercise</a>
             </div>
             <div class="box">
-                KAKAO OPEN API.
+                <a href="data.html">공공 데이터 OPEN API Exercise</a>
             </div>
             <div class="box">
                 Youtube OPEN API.

@@ -2,6 +2,7 @@
 <html>
 <title>Open API Exercise</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
     body {
         background-color: #eeeeee;
@@ -18,17 +19,17 @@
     }
 
     .main-container {
-        width: 1080px;
+        width: 50vw;
         margin: auto;
         display: grid;
-        grid-template-rows: 20vh 60vh 20vh;
-        row-gap: 1em;
+        grid-template-rows: 20vh 50vh 20vh;
+        row-gap: 1vh;
         border: 1px red;
     }
 
     .header {
         border: 1px solid red;
-        font-size: 2em;
+        font-size: 2vw;
         text-align: center;
         margin: 0;
     }
@@ -53,7 +54,17 @@
             </a>
         </div>
         <div class="content">
-            <p></p>
+            <table class="table" id="table">
+                <thead>
+                    <tr>
+                        <th>저작물명</th>
+                        <th>아티스트명</th>
+                    </tr>
+                </thead>
+            </table>
+            <input id='page' type='button' onclick='count("plus")' value='+' />
+            <span id='result'>1</span>
+            <input id='page' type='button' onclick='count("minus")' value='-' />
         </div>
         <div class="footer">
 
@@ -63,16 +74,42 @@
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous">
         </script>
     <script>
-        var url = "https://api.odcloud.kr/api/15071046/v1/uddi:abe42915-3cb5-477d-8d53-b7430e5567f0";
-        var key = '?' + 'page=1&perPage=1698&' + encodeURIComponent('serviceKey') + '=BpVkp8tRMvruN%2B9MjZ3x5M%2F%2BHLfC1sBr1cwsdHz002xQg9r04V4z4hR1TdTlTr9acG0%2B7OvJtVinbbZ3hCC1cQ%3D%3D'; /* Service Key*/
-        $.ajax({
-            method: "GET",
-            url: url + key
-        })
-            .done(function (msg) {
-                console.log(msg);
-                $("p").html("<strong>" + msg + "</strong>");
-            });
+        function count(type) {
+            const resultElement = document.getElementById('result');
+
+            var number = resultElement.innerText;
+
+            if (type === 'plus') {
+                number = parseInt(number) + 1;
+                console.log(number);
+            } else if (type === 'minus') {
+                number = parseInt(number) - 1;
+                console.log(number);
+            }
+
+            resultElement.innerText = number;
+        }
+
+
+        $(document).ready(function () {
+            var url = "https://api.odcloud.kr/api/15071046/v1/uddi:abe42915-3cb5-477d-8d53-b7430e5567f0";
+            var key = '?' + 'page=' + $("#number") + '&perPage=15&' + encodeURIComponent('serviceKey') + '=BpVkp8tRMvruN%2B9MjZ3x5M%2F%2BHLfC1sBr1cwsdHz002xQg9r04V4z4hR1TdTlTr9acG0%2B7OvJtVinbbZ3hCC1cQ%3D%3D'; /* Service Key*/
+            $.ajax({
+                method: "GET",
+                url: url + key
+            })
+                .done(function (msg) {
+                    console.log(msg);
+                    let table_data = "";
+                    for (var i = 0; i < 15; i++) {
+                        table_data += "<tr>";
+                        table_data += "<td>" + msg.data[i].저작물명 + "</td>"
+                        table_data += "<td>" + msg.data[i].아티스트명 + "</td>"
+                        table_data += "</tr>";
+                    }
+                    $('#table').html(table_data);
+                });
+        });
     </script>
 </body>
 </head>
