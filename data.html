@@ -1,69 +1,75 @@
 <!DOCTYPE html>
 <html>
-<title>Open API Exercise</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<style>
-    body {
-        background-color: #eeeeee;
-        color: #636e72;
-    }
-
-    a {
-        color: #636e72;
-        text-decoration: none;
-    }
-
-    a:visited {
-        color: #636e72;
-    }
-
-    .main-container {
-        width: 50vw;
-        margin: auto;
-        display: grid;
-        grid-template-rows: 20vh 50vh 20vh;
-        row-gap: 1vh;
-        border: 1px red;
-    }
-
-    .header {
-        border: 1px solid red;
-        font-size: 2vw;
-        text-align: center;
-        margin: 0;
-    }
-
-    .content {
-        border: 1px solid red;
-
-    }
-
-    .footer {
-        border: 1px solid red;
-    }
-
-    .table {
-        width: 100%;
-        border: 1px solid red;
-        text-align: center;
-        margin-bottom: 1vw;
-        font-size: 0.9vw;
-    }
-
-    .paging {
-        text-align: center;
-    }
-
-    button {
-        margin: 0 1vw;
-        width: 5vw;
-        height: 3vh;
-        font-size: 1vw;
-    }
-</style>
 
 <head>
+    <title>Open API Exercise</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+        body {
+            background-color: #eeeeee;
+            color: #636e72;
+        }
+
+        a {
+            color: #636e72;
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: #636e72;
+        }
+
+        .main-container {
+            width: 50vw;
+            margin: auto;
+            display: grid;
+            grid-template-rows: 20vh 50vh 20vh;
+            row-gap: 1vh;
+            border: 1px red;
+        }
+
+        .header {
+            border: 1px solid red;
+            font-size: 2vw;
+            text-align: center;
+            margin: 0;
+        }
+
+        .content {
+            border: 1px solid red;
+
+        }
+
+        .footer {
+            border: 1px solid red;
+        }
+
+        .table {
+            width: 100%;
+            border: 1px solid red;
+            text-align: center;
+            font-size: 0.9vw;
+        }
+
+        .paging {
+            text-align: center;
+        }
+
+        button {
+            margin: 0 1vw;
+            width: 5vw;
+            height: 3vh;
+            font-size: 1vw;
+        }
+
+        .search-box {
+            text-align: center;
+            margin-top: 1vw;
+            width: 50vw;
+        }
+    </style>
+</head>
 
 <body>
     <div class="main-container">
@@ -86,12 +92,24 @@
                 <button id='decrease'>이전</button>
                 <span id='result'></span>
                 <button id='increase'>다음</button>
-
+            </div>
+            <div class="search-box">
+                <input id="pagenum" value="" type="text">
+                <button id="search">Search</button>
             </div>
 
 
         </div>
         <div class="footer">
+            <strong>Explain</strong>
+            <li>공공 데이터 포털의 한국저작권보호원_음악 저작물 API 목록을 활용.</li>
+            <li>저작물 목록을 배열로 받고 for문을 통해 테이블로 출력.</li>
+            <li>for문의 범위를 배열의 크기로 지정하여 마지막 페이지의 경우에도 에러 방지.</li>
+            <li>Request의 page 부분을 변수로 처리하여 15개씩 page 단위로 배열을 받아 사용.</li>
+            <li>Button을 이용해 변수 page의 값 변경, 그에 따른 table 갱신.</li>
+            <li>처음 페이지와 마지막 페이지는 경고문 출력.</li>
+            <11>Search를 통해 page 검색, 범위 초과시 경고문 출력 후 새로고침.</11>
+
 
         </div>
     </div>
@@ -128,26 +146,34 @@
             listup();
 
             $('#increase').click(function () {
-                if (page == 169) {
-                    page = parseInt(page) - 1;
+                page = parseInt(page) + 1;
+                if (page > 114) {
+                    page = 114;
                     alert("데이터 없음");
                 }
-                page = parseInt(page) + 1;
                 console.log(page);
                 listup();
-            })
+            });
             $('#decrease').click(function () {
-                if (page == 1) {
+                page = parseInt(page) - 1;
+                if (page < 1) {
                     page = parseInt(page) + 1;
                     alert("데이터 없음");
                 }
-                page = parseInt(page) - 1;
                 console.log(page);
                 listup();
-            })
+            });
+
+            $("#search").click(function () {
+                page = document.getElementById('pagenum').value;
+                if (page < 1 || page > 114) {
+                    alert("데이터 없음");
+                    location.reload();
+                }
+                console.log(page);
+                listup();
+            });
         });
     </script>
 </body>
-</head>
-
 </html>
