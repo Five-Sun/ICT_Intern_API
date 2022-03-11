@@ -42,6 +42,25 @@
     .footer {
         border: 1px solid red;
     }
+
+    .table {
+        width: 100%;
+        border: 1px solid red;
+        text-align: center;
+        margin-bottom: 1vw;
+        font-size: 0.9vw;
+    }
+
+    .paging {
+        text-align: center;
+    }
+
+    button {
+        margin: 0 1vw;
+        width: 5vw;
+        height: 3vh;
+        font-size: 1vw;
+    }
 </style>
 
 <head>
@@ -54,19 +73,23 @@
             </a>
         </div>
         <div class="content">
-            <table class="table" id="table">
-                <thead>
+            <table class="table">
+                <thead class="thead">
                     <tr>
                         <th>저작물명</th>
                         <th>아티스트명</th>
                     </tr>
                 </thead>
+                <tbody id="table" class="tbody"></tbody>
             </table>
-            <button id='decrease'>이전</button>
-            <span id='result'></span>
-            <button id='increase'>다음</button>
-            
-            
+            <div class="paging">
+                <button id='decrease'>이전</button>
+                <span id='result'></span>
+                <button id='increase'>다음</button>
+
+            </div>
+
+
         </div>
         <div class="footer">
 
@@ -77,11 +100,11 @@
         </script>
     <script>
         var page = 1;
-        
+
         function listup() {
-            document.getElementById("result").innerHTML=page + "쪽";
+            document.getElementById("result").innerHTML = page + "쪽";
             var url = "https://api.odcloud.kr/api/15071046/v1/uddi:abe42915-3cb5-477d-8d53-b7430e5567f0";
-            var key = '?' + 'page=' + page + '&perPage=10&' + encodeURIComponent('serviceKey') + '=BpVkp8tRMvruN%2B9MjZ3x5M%2F%2BHLfC1sBr1cwsdHz002xQg9r04V4z4hR1TdTlTr9acG0%2B7OvJtVinbbZ3hCC1cQ%3D%3D'; /* Service Key*/
+            var key = '?' + 'page=' + page + '&perPage=15&' + encodeURIComponent('serviceKey') + '=BpVkp8tRMvruN%2B9MjZ3x5M%2F%2BHLfC1sBr1cwsdHz002xQg9r04V4z4hR1TdTlTr9acG0%2B7OvJtVinbbZ3hCC1cQ%3D%3D'; /* Service Key*/
 
             $.ajax({
                 method: "GET",
@@ -89,14 +112,15 @@
             })
                 .done(function (msg) {
                     console.log(msg);
+                    console.log(msg.data.length);
                     let table_data = "";
-                    for (var i = 0; i < 10; i++) {
+                    for (var i = 0; i < msg.data.length; i++) {
                         table_data += "<tr>";
-                        table_data += "<td>" + msg.data[i].저작물명 + "</td>"
-                        table_data += "<td>" + msg.data[i].아티스트명 + "</td>"
+                        table_data += "<td>" + msg.data[i].저작물명 + "</td>";
+                        table_data += "<td>" + msg.data[i].아티스트명 + "</td>";
                         table_data += "</tr>";
                     }
-                    $('#table').html(table_data);
+                    $('#table').html(table_data)
                 });
 
         }
@@ -104,7 +128,7 @@
             listup();
 
             $('#increase').click(function () {
-                if(page == 169) {
+                if (page == 169) {
                     page = parseInt(page) - 1;
                     alert("데이터 없음");
                 }
@@ -113,10 +137,9 @@
                 listup();
             })
             $('#decrease').click(function () {
-                if(page == 1) {
+                if (page == 1) {
                     page = parseInt(page) + 1;
                     alert("데이터 없음");
-                    
                 }
                 page = parseInt(page) - 1;
                 console.log(page);
