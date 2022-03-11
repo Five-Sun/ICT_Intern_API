@@ -62,9 +62,11 @@
                     </tr>
                 </thead>
             </table>
-            <button id='increase' value='+'>+</button>
-            <button id='decrease' value='-'>-</button>
-            <div id='result'>${page}</div>
+            <button id='decrease'>이전</button>
+            <span id='result'></span>
+            <button id='increase'>다음</button>
+            
+            
         </div>
         <div class="footer">
 
@@ -74,10 +76,12 @@
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous">
         </script>
     <script>
-        $(document).ready(function () {
-            var page = 1;
+        var page = 1;
+        
+        function listup() {
+            document.getElementById("result").innerHTML=page + "쪽";
             var url = "https://api.odcloud.kr/api/15071046/v1/uddi:abe42915-3cb5-477d-8d53-b7430e5567f0";
-            var key = '?' + 'page=' + page + '&perPage=15&' + encodeURIComponent('serviceKey') + '=BpVkp8tRMvruN%2B9MjZ3x5M%2F%2BHLfC1sBr1cwsdHz002xQg9r04V4z4hR1TdTlTr9acG0%2B7OvJtVinbbZ3hCC1cQ%3D%3D'; /* Service Key*/
+            var key = '?' + 'page=' + page + '&perPage=10&' + encodeURIComponent('serviceKey') + '=BpVkp8tRMvruN%2B9MjZ3x5M%2F%2BHLfC1sBr1cwsdHz002xQg9r04V4z4hR1TdTlTr9acG0%2B7OvJtVinbbZ3hCC1cQ%3D%3D'; /* Service Key*/
 
             $.ajax({
                 method: "GET",
@@ -86,7 +90,7 @@
                 .done(function (msg) {
                     console.log(msg);
                     let table_data = "";
-                    for (var i = 0; i < 15; i++) {
+                    for (var i = 0; i < 10; i++) {
                         table_data += "<tr>";
                         table_data += "<td>" + msg.data[i].저작물명 + "</td>"
                         table_data += "<td>" + msg.data[i].아티스트명 + "</td>"
@@ -94,48 +98,29 @@
                     }
                     $('#table').html(table_data);
                 });
-            $('#increase').click(function () {
-                page = parseInt(page) + 1;
-                console.log(page)
-            var url = "https://api.odcloud.kr/api/15071046/v1/uddi:abe42915-3cb5-477d-8d53-b7430e5567f0";
-            var key = '?' + 'page=' + page + '&perPage=15&' + encodeURIComponent('serviceKey') + '=BpVkp8tRMvruN%2B9MjZ3x5M%2F%2BHLfC1sBr1cwsdHz002xQg9r04V4z4hR1TdTlTr9acG0%2B7OvJtVinbbZ3hCC1cQ%3D%3D'; /* Service Key*/
 
-                $.ajax({
-                    method: "GET",
-                    url: url + key
-                })
-                    .done(function (msg) {
-                        console.log(msg);
-                        let table_data = "";
-                        for (var i = 0; i < 15; i++) {
-                            table_data += "<tr>";
-                            table_data += "<td>" + msg.data[i].저작물명 + "</td>"
-                            table_data += "<td>" + msg.data[i].아티스트명 + "</td>"
-                            table_data += "</tr>";
-                        }
-                        $('#table').html(table_data);
-                    });
+        }
+        $(document).ready(function () {
+            listup();
+
+            $('#increase').click(function () {
+                if(page == 169) {
+                    page = parseInt(page) - 1;
+                    alert("데이터 없음");
+                }
+                page = parseInt(page) + 1;
+                console.log(page);
+                listup();
             })
             $('#decrease').click(function () {
+                if(page == 1) {
+                    page = parseInt(page) + 1;
+                    alert("데이터 없음");
+                    
+                }
                 page = parseInt(page) - 1;
-            var url = "https://api.odcloud.kr/api/15071046/v1/uddi:abe42915-3cb5-477d-8d53-b7430e5567f0";
-            var key = '?' + 'page=' + page + '&perPage=15&' + encodeURIComponent('serviceKey') + '=BpVkp8tRMvruN%2B9MjZ3x5M%2F%2BHLfC1sBr1cwsdHz002xQg9r04V4z4hR1TdTlTr9acG0%2B7OvJtVinbbZ3hCC1cQ%3D%3D'; /* Service Key*/
-
-                $.ajax({
-                    method: "GET",
-                    url: url + key
-                })
-                    .done(function (msg) {
-                        console.log(msg);
-                        let table_data = "";
-                        for (var i = 0; i < 15; i++) {
-                            table_data += "<tr>";
-                            table_data += "<td>" + msg.data[i].저작물명 + "</td>"
-                            table_data += "<td>" + msg.data[i].아티스트명 + "</td>"
-                            table_data += "</tr>";
-                        }
-                        $('#table').html(table_data);
-                    });
+                console.log(page);
+                listup();
             })
         });
     </script>
