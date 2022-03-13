@@ -21,33 +21,32 @@
         }
 
         .main-container {
-            width: 50vw;
+            width: 60vw;
             margin: auto;
             display: grid;
             grid-template-rows: 20vh 50vh 20vh;
             row-gap: 1vh;
-            border: 1px red;
         }
 
         .header {
-            border: 1px solid red;
             font-size: 2vw;
             text-align: center;
             margin: 0;
         }
 
         .content {
-            border: 1px solid red;
+            border-top: 1px solid black;
 
         }
 
         .footer {
-            border: 1px solid red;
+            border-top: 1px solid black;
+            text-align: left;
+            font-size: 1vw;
         }
 
         .table {
             width: 100%;
-            border: 1px solid red;
             text-align: center;
             font-size: 0.8vw;
         }
@@ -64,9 +63,7 @@
         }
 
         .search-box {
-            text-align: center;
-            margin-top: 1vw;
-            width: 50vw;
+            text-align: right;
         }
     </style>
 </head>
@@ -94,7 +91,7 @@
                 <button id='increase'>다음</button>
             </div>
             <div class="search-box">
-                <input id="pagenum" value="" type="text">
+                <input id="pagenum" value="" type="text" placeholder="page">
                 <button id="search">Search</button>
             </div>
 
@@ -108,7 +105,7 @@
             <li>Request의 page 부분을 변수로 처리하여 15개씩 page 단위로 배열을 받아 사용.</li>
             <li>Button을 이용해 변수 page의 값 변경, 그에 따른 table 갱신.</li>
             <li>처음 페이지와 마지막 페이지는 경고문 출력.</li>
-            <11>Search를 통해 page 검색, 범위 초과시 경고문 출력 후 새로고침.</11>
+            <li>Search를 통해 page 검색, 범위 초과시 경고문 출력 후 새로고침.</li>
 
 
         </div>

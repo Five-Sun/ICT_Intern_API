@@ -28,3 +28,9 @@ app.get('/data', function(request, response) {
         response.send(data.toString());
     });
 }); //공공데이터 Open API 활용
+
+app.get('/index', function(request, response) {
+    fs.readFile('index.html', function(error, data) {
+        response.send(data.toString());
+    });
+}); //공공데이터 Open API 활용
