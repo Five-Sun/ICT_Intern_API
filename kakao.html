@@ -98,7 +98,7 @@
                 <input id="bookName" value="" type="text">
                 <button id="search">Search</button>
             </div>
-            <div id="thumbnail"></div>
+            <div id="thumbnail" onclick="js:kakaoShare()"></div>
             <span id="title"></span>
             <span id="contents"></span>
             <span id="sale_price"></span>
@@ -119,33 +119,62 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous">
         </script>
-                <script>
-                    $(document).ready(function () {
-                        $("#search").click(function () {
-                            $.ajax({
-                                method: "GET",
-                                url: "https://dapi.kakao.com/v3/search/book?target=title",
-                                data: { query: $("#bookName").val() },
-                                headers: { Authorization: "KakaoAK 3705e65d3da8505380bbd2d83e4a085f" }
-                            })
-                                .done(function (msg) {
-                                    try {
-                                        console.log(msg.documents[0].title);
-                                        console.log(msg.documents[0].thumbnail);
-                                        $("#title").html("<strong>Title: " + msg.documents[0].title + "</strong>");
-                                        $("#contents").html("<strong>Contents: " + msg.documents[0].contents + "</strong>");
-                                        $("#sale_price").html("<strong>Sale_price: " + msg.documents[0].sale_price + "</strong>");
-                                        $("#link").html("<a href='" + msg.documents[0].url + "' target='_blank'>" + "<strong>자세히 보기(Click)</strong>" + "</a>");
-                                        $("#status").html("<strong>Status: " + msg.documents[0].status + "</strong>");
-                                        $("#thumbnail").html("<img src='" + msg.documents[0].thumbnail + "'/>");
-                                    } catch (err) {
-                                        alert("일치하는 결과가 없습니다.");
-                                        location.reload();
-                                    }
-                                });
-                        });
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#search").click(function () {
+                $.ajax({
+                    method: "GET",
+                    url: "https://dapi.kakao.com/v3/search/book?target=title",
+                    data: { query: $("#bookName").val() },
+                    headers: { Authorization: "KakaoAK 3705e65d3da8505380bbd2d83e4a085f" }
+                })
+                    .done(function (msg) {
+                        try {
+                            console.log(msg.documents[0].title);
+                            console.log(msg.documents[0].thumbnail);
+                            $("#title").html("<strong>Title: " + msg.documents[0].title + "</strong>");
+                            $("#contents").html("<strong>Contents: " + msg.documents[0].contents + "</strong>");
+                            $("#sale_price").html("<strong>Sale_price: " + msg.documents[0].sale_price + "</strong>");
+                            $("#link").html("<a href='" + msg.documents[0].url + "' target='_blank'>" + "<strong>자세히 보기(Click)</strong>" + "</a>");
+                            $("#status").html("<strong>Status: " + msg.documents[0].status + "</strong>");
+                            $("#thumbnail").html("<img src='" + msg.documents[0].thumbnail + "'/>");
+                        } catch (err) {
+                            alert("일치하는 결과가 없습니다.");
+                            location.reload();
+                        }
+                    });
+            });
         });
-        </script>
+    </script>
+
+    <script>
+        Kakao.init('46fb8967b79616210acc50d982ee0ba8');
+        console.log(Kakao.isInitialized());
+
+        function kakaoShare(msg) {
+            Kakao.Link.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: 'Open API',
+                    imageUrl:
+                        'msg.documents[0].thumbnail',
+                    link: {
+                        mobileWebUrl: 'msg.documents[0].url',
+                        androidExecutionParams: 'test',
+                    },
+                },
+                buttons: [
+                    {
+                        title: '웹으로 이동',
+                        link: {
+                            mobileWebUrl: 'https://developers.kakao.com',
+                        },
+                    }
+                ]
+            });
+        }
+    </script>
 </body>
 
 </html>
