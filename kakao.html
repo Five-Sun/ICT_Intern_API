@@ -73,7 +73,8 @@
         }
 
         img {
-            width: 30vw;
+            float: right;
+            width: 20vw;
             height: 35vh;
         }
 
@@ -139,6 +140,10 @@
                             $("#link").html("<a href='" + msg.documents[0].url + "' target='_blank'>" + "<strong>자세히 보기(Click)</strong>" + "</a>");
                             $("#status").html("<strong>Status: " + msg.documents[0].status + "</strong>");
                             $("#thumbnail").html("<img src='" + msg.documents[0].thumbnail + "'/>");
+
+                            const url = msg.documents[0].url
+
+                            console.log(url);
                         } catch (err) {
                             alert("일치하는 결과가 없습니다.");
                             location.reload();
@@ -151,7 +156,7 @@
         Kakao.init('46fb8967b79616210acc50d982ee0ba8');
         console.log(Kakao.isInitialized());
 
-        function kakaoShare(msg) {
+        function kakaoShare() {
             Kakao.Link.sendDefault({
                 objectType: 'feed',
                 content: {
