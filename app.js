@@ -10,21 +10,23 @@ app.listen(3000, function() {
     console.log('server running at http://127.0.0.1:3000');
 });//server 실행
 
+app.use('/js',express.static(__dirname + '/js'))
+
 app.get('/', function(request, response) {
-    fs.readFile("main.html", function(error, data) {
+    fs.readFile("./page/main.html", function(error, data) {
         response.writeHead(200, {"Content-Type" : "text/html"});
         response.end(data);
     });
 }); //메인 화면
 
 app.get('/kakao', function(request, response) {
-    fs.readFile('kakao.html', function(error, data) {
+    fs.readFile('./page/kakao.html', function(error, data) {
         response.send(data.toString());
     });
 }); //Kakao Open API 활용
 
 app.get('/data', function(request, response) {
-    fs.readFile('data.html', function(error, data) {
+    fs.readFile('./page/data.html', function(error, data) {
         response.send(data.toString());
     });
 }); //공공데이터 Open API 활용

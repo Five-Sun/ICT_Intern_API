@@ -5,6 +5,7 @@
     <title>Open API Exercise</title>
     <meta http-equiv="Contetn-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="./js/share.js"></script>
     <style>
         body {
             background-color: #eeeeee;
@@ -76,6 +77,7 @@
             float: right;
             width: 20vw;
             height: 35vh;
+            cursor: pointer;
         }
 
         span {
@@ -99,12 +101,13 @@
                 <input id="bookName" value="" type="text">
                 <button id="search">Search</button>
             </div>
-            <div id="thumbnail" onclick="js:kakaoShare()"></div>
+            <div id="thumbnail"></div>
             <span id="title"></span>
             <span id="contents"></span>
             <span id="sale_price"></span>
             <span id="status"></span>
             <span id="link"></span>
+
         </div>
         <div class="footer">
             <strong>Explain</strong>
@@ -119,7 +122,7 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script>
         $(document).ready(function () {
@@ -132,6 +135,7 @@
                 })
                     .done(function (msg) {
                         try {
+                            console.log(msg)
                             console.log(msg.documents[0].title);
                             console.log(msg.documents[0].thumbnail);
                             $("#title").html("<strong>Title: " + msg.documents[0].title + "</strong>");
@@ -139,7 +143,7 @@
                             $("#sale_price").html("<strong>Sale_price: " + msg.documents[0].sale_price + "</strong>");
                             $("#link").html("<a href='" + msg.documents[0].url + "' target='_blank'>" + "<strong>자세히 보기(Click)</strong>" + "</a>");
                             $("#status").html("<strong>Status: " + msg.documents[0].status + "</strong>");
-                            $("#thumbnail").html("<img src='" + msg.documents[0].thumbnail + "'/>");
+                            $("#thumbnail").html("<img src='" + msg.documents[0].thumbnail + "' title='눌러서 카카오톡 공유하기' onClick='js:kakaoShare()'/>");
 
                             const url = msg.documents[0].url
 
@@ -148,36 +152,13 @@
                             alert("일치하는 결과가 없습니다.");
                             location.reload();
                         }
-                    });   
+                    });
             });
         });
     </script>
     <script>
         Kakao.init('46fb8967b79616210acc50d982ee0ba8');
         console.log(Kakao.isInitialized());
-
-        function kakaoShare() {
-            Kakao.Link.sendDefault({
-                objectType: 'feed',
-                content: {
-                    title: 'Open API',
-                    imageUrl:
-                        'msg.documents[0].thumbnail',
-                    link: {
-                        mobileWebUrl: 'msg.documents[0].url',
-                        androidExecutionParams: 'test',
-                    },
-                },
-                buttons: [
-                    {
-                        title: '웹으로 이동',
-                        link: {
-                            mobileWebUrl: 'https://developers.kakao.com',
-                        },
-                    }
-                ]
-            });
-        }
     </script>
 </body>
 
