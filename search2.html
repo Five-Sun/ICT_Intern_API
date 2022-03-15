@@ -120,6 +120,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous">
         </script>
+    <script src="./js/search2.js"></script>
     <script>
         var page = 1;
 
@@ -135,11 +136,11 @@
                 .done(function (msg) {
                     console.log(msg);
                     console.log(msg.data.length);
-                    var data = JSON.stringify(msg.documents[0]);
+                    var data = JSON.stringify(msg.data[0]);
                     let table_data = "";
                     for (var i = 0; i < msg.data.length; i++) {
                         table_data += "<tr>";
-                        table_data += "<td onClick='js:kakaoShare("+ data +")'>" + msg.data[i].저작물명 + "</td>";
+                        table_data += "<td id='title' onClick='js:youtube()'>" + msg.data[i].저작물명 + "</td>";
                         table_data += "<td>" + msg.data[i].아티스트명 + "</td>";
                         table_data += "</tr>";
                     }
