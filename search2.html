@@ -1,185 +1,87 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <title>Open API Exercise</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <style>
-        body {
-            background-color: #eeeeee;
-            color: #636e72;
-        }
-
-        a {
-            color: #636e72;
-            text-decoration: none;
-        }
-
-        a:visited {
-            color: #636e72;
-        }
-
-        .main-container {
-            width: 60vw;
-            margin: auto;
-            display: grid;
-            grid-template-rows: 20vh 50vh 20vh;
-            row-gap: 1vh;
-        }
-
-        .header {
-            font-size: 2vw;
-            text-align: center;
-            margin: 0;
-        }
-
-        .content {
-            border-top: 1px solid black;
-
-        }
-
-        .footer {
-            border-top: 1px solid black;
-            text-align: left;
-            font-size: 1vw;
-        }
-
-        .table {
-            width: 100%;
-            text-align: center;
-            font-size: 0.8vw;
-        }
-
-        .song {
-            width: 50%;
-        }
-        
-        .artist {
-            width: 50%;
-        }
-
-        .paging {
-            text-align: center;
-        }
-
-        button {
-            margin: 0 1vw;
-            width: 5vw;
-            height: 3vh;
-            font-size: 1vw;
-        }
-
-        .search-box {
-            text-align: right;
-        }
-    </style>
-</head>
-<body>
-    <div class="main-container">
-        <div class="header">
-            <a href="/">
-                <h1>OPEN API Exercise</h1>
-            </a>
+  <head>
+    <title>Youtube Video Advanced Search App in Javascript</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+  </head>
+  <body>
+  <div class="container">
+      <br>
+      <h1 class="text-center">
+          Youtube Advanced Search App
+      </h1>
+      <br>
+      <form id="myForm" autocomplete="off">
+          <div class="form-group">
+            <input class="form-control" type="text" id="search" placeholder="Topic" required>
+          </div>
+          <div class="form-group">
+            <label for="duration">Select Duration:</label>
+            <select class="form-control" id="duration">
+              <option>any</option>
+              <option>short</option>
+              <option>medium</option>
+              <option>long</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="order">Order:</label>
+            <select class="form-control" id="order">
+              <option>relevance</option>
+              <option>viewCount</option>
+              <option>videoCount</option>
+              <option>title</option>
+              <option>rating</option>
+              <option>date</option>
+            </select>
+          </div>
+          <div class="form-group">
+              <label for="fromdate">Before:</label>
+              <input type="text" class="form-control" name="" id="beforedate">
+          </div>
+          <div class="form-group">
+            <label for="fromdate">After:</label>
+            <input type="text" class="form-control" name="" id="afterdate">
         </div>
-        <div class="content">
-            <table class="table">
-                <thead class="thead">
-                    <tr>
-                        <th class="song">저작물명</th>
-                        <th class="artist">아티스트명</th>
-                    </tr>
-                </thead>
-                <tbody id="table" class="tbody"></tbody>
-            </table>
-            <div class="paging">
-                <button id='decrease'>이전</button>
-                <span id='result'></span>
-                <button id='increase'>다음</button>
-            </div>
-            <div class="search-box">
-                <input id="pagenum" value="" type="text" placeholder="page">
-                <button id="search">Search</button>
-            </div>
-
-
-        </div>
-        <div class="footer">
-            <strong>Explain</strong>
-            <li>공공 데이터 포털의 한국저작권보호원_음악 저작물 API 목록을 활용.</li>
-            <li>저작물 목록을 배열로 받고 for문을 통해 테이블로 출력.</li>
-            <li>for문의 범위를 배열의 크기로 지정하여 마지막 페이지의 경우에도 에러 방지.</li>
-            <li>Request의 page 부분을 변수로 처리하여 15개씩 page 단위로 배열을 받아 사용.</li>
-            <li>Button을 이용해 변수 page의 값 변경, 그에 따른 table 갱신.</li>
-            <li>처음 페이지와 마지막 페이지는 경고문 출력.</li>
-            <li>Search를 통해 page 검색, 범위 초과시 경고문 출력 후 새로고침.</li>
-
-
-        </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous">
-        </script>
-    <script src="./js/search2.js"></script>
-    <script>
-        var page = 1;
-
-        function listup() {
-            document.getElementById("result").innerHTML = page + "쪽";
-            var url = "https://api.odcloud.kr/api/15071046/v1/uddi:abe42915-3cb5-477d-8d53-b7430e5567f0";
-            var key = '?' + 'page=' + page + '&perPage=15&' + encodeURIComponent('serviceKey') + '=BpVkp8tRMvruN%2B9MjZ3x5M%2F%2BHLfC1sBr1cwsdHz002xQg9r04V4z4hR1TdTlTr9acG0%2B7OvJtVinbbZ3hCC1cQ%3D%3D'; /* Service Key*/
-
-            $.ajax({
-                method: "GET",
-                url: url + key
-            })
-                .done(function (msg) {
-                    console.log(msg);
-                    console.log(msg.data.length);
-                    var data = JSON.stringify(msg.data[0]);
-                    let table_data = "";
-                    for (var i = 0; i < msg.data.length; i++) {
-                        table_data += "<tr>";
-                        table_data += "<td id='title' onClick='js:youtube()'>" + msg.data[i].저작물명 + "</td>";
-                        table_data += "<td>" + msg.data[i].아티스트명 + "</td>";
-                        table_data += "</tr>";
-                    }
-                    $('#table').html(table_data)
-                });
-
-        }
-        $(document).ready(function () {
-            listup();
-
-            $('#increase').click(function () {
-                page = parseInt(page) + 1;
-                if (page > 114) {
-                    page = 114;
-                    alert("데이터 없음");
-                }
-                console.log(page);
-                listup();
-            });
-            $('#decrease').click(function () {
-                page = parseInt(page) - 1;
-                if (page < 1) {
-                    page = parseInt(page) + 1;
-                    alert("데이터 없음");
-                }
-                console.log(page);
-                listup();
-            });
-
-            $("#search").click(function () {
-                page = document.getElementById('pagenum').value;
-                if (page < 1 || page > 114) {
-                    alert("데이터 없음");
-                    location.reload();
-                }
-                console.log(page);
-                listup();
-            });
-        });
-    </script>
+          <div class="form-group">
+              <button id="btn" class="btn btn-danger btn-block">
+                  Search Videos
+              </button>
+          </div>
+      </form>
+      <table style="display: none;" id="table" class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Thumbnail</th>
+            <th>Visit Channel</th>
+          </tr>
+        </thead>
+        <tbody id="results">
+        </tbody>
+      </table>
+      <div id="pager">
+		<ul id="pagination" class="pagination-sm"></ul>
+	</div>
+  </div>
 </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+  <script>
+      $("#beforedate").datepicker({
+
+      })
+      $("#afterdate").datepicker({
+
+})
+
+  </script>
+  <script src="./js/search2.js"></script>
 </html>

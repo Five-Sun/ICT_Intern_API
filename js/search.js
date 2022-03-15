@@ -11,17 +11,15 @@ $(document).ready(function() {
   })
 
   function videoSearch(key, search, maxResults) {
-
-    $.get("https://www.googleapis.com/youtube/v3/search?key=" + key
-    + "&type=video&part=snippet&maxResults=" + maxResults + "&q=" + search, function(data) {
-      console.log(data)
-
-      data.items.forEach(item => {
-        video = `
-        <iframe width="420" height="315" src="http://www.youtube.com/embed/${item.id.videoID}" frameborder="0" allowfullscreen></iframe>
-        `
-        $("videos").append(video)
-      });
+      $.ajax({
+        method: "GET",
+        url: "https://www.googleapis.com/youtube/v3/search?key=" + key
+        + "&type=video&part=snippet&maxResults=" + maxResults + "&q=" + search
     })
-  }
-})
+        .done(function (msg) {
+            console.log(msg);
+            $("#videos").html("<a href='http://www.youtube.com/embed/"+ msg.items[0].id.videoId + "' target='_blank' >" + "<strong>자세히 보기(Click)</strong>" + "</a>");
+        });
+  
+    };
+});

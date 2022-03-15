@@ -2,9 +2,13 @@
 <html>
   <head>
     <title>Search</title>
+    <style>
+      span {
+        border: 1px solid black;
+      }
+    </style>
   </head>
   <body>
-    <div class="container">
       <form>
         <div class="form-group">
           <input type="text" class="form-control" id="search">
@@ -13,15 +17,42 @@
           <input type="submit" value="search">
         </div>
       </form>
-      <div class="row">
-        <div class="col-md-12">
-          <div id="videos">
-
-          </div>
-        </div>
-      </div:cla>
-    </div>
+        <span class="videos">hi</span>
+        <span class="title">hi</span>
   </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="./js/search.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"> //CDN
+    </script>
+  <script>
+    $(document).ready(function() {
+  var API_KEY="AIzaSyDQSVysWES54RDYnjZtfbmftS1K6WlBpVQ";
+
+  $("form").submit(function(event) {
+    event.preventDefault()
+
+    var search = $("#search").val()
+
+    videoSearch(API_KEY,search,1)
+  })
+
+  function videoSearch(key, search, maxResults) {
+      $.ajax({
+        method: "GET",
+        url: "https://www.googleapis.com/youtube/v3/search?key=" + key
+        + "&type=video&part=snippet&maxResults=" + maxResults + "&q=" + search
+    })
+        .done(function (msg) {
+            console.log(msg);
+            var data = JSON.stringify(msg.items[0]);
+            $("#title").html(msg);
+
+            $("#videos").html("<a href='http://www.youtube.com/embed/"+ msg.items[0].id.videoId + "' target='_blank' >" + "<strong>자세히 보기(Click)</strong>" + "</a>");
+        });
+  
+    };
+});
+  </script>
 </html>
+
+http://www.youtube.com/embed/QnAhnxmSNFw
