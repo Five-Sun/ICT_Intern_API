@@ -1,20 +1,27 @@
-function kakaoShare(image, url) {
+function kakaoShare(data) {
+
+    const shareImage = data.thumbnail;
+    const shareTitle = data.title;
+    const shareDes = data.contents;
+    const shareUrl = data.url;
+
     Kakao.Link.sendDefault({
         objectType: 'feed',
         content: {
-            title: '카카오 도서 검색 Open API',
-            imageUrl:
-                'image',
+            title: shareTitle,
+            description: shareDes,
+            imageUrl: shareImage,
             link: {
-                mobileWebUrl: '',
-                androidExecutionParams: 'test',
+                mobileWebUrl: shareUrl,
+                webUrl:shareUrl 
             },
         },
         buttons: [
             {
-                title: '웹으로 이동',
+                title: '홈페이지 가기',
                 link: {
-                    mobileWebUrl: '',
+                    mobileWebUrl: shareUrl,
+                    webUrl: shareUrl
                 },
             }
         ]

@@ -104,7 +104,7 @@
             <div id="thumbnail"></div>
             <span id="title"></span>
             <span id="contents"></span>
-            <span id="sale_price"></span>
+            <span id="price"></span>
             <span id="status"></span>
             <span id="link"></span>
 
@@ -138,16 +138,14 @@
                             console.log(msg)
                             console.log(msg.documents[0].title);
                             console.log(msg.documents[0].thumbnail);
+                            var data = JSON.stringify(msg.documents[0]);
                             $("#title").html("<strong>Title: " + msg.documents[0].title + "</strong>");
                             $("#contents").html("<strong>Contents: " + msg.documents[0].contents + "</strong>");
-                            $("#sale_price").html("<strong>Sale_price: " + msg.documents[0].sale_price + "</strong>");
+                            $("#price").html("<strong>Price: " + msg.documents[0].price + "</strong>");
                             $("#link").html("<a href='" + msg.documents[0].url + "' target='_blank'>" + "<strong>자세히 보기(Click)</strong>" + "</a>");
                             $("#status").html("<strong>Status: " + msg.documents[0].status + "</strong>");
-                            $("#thumbnail").html("<img src='" + msg.documents[0].thumbnail + "' title='눌러서 카카오톡 공유하기' onClick='js:kakaoShare()'/>");
+                            $("#thumbnail").html("<img src='" + msg.documents[0].thumbnail + "' title='눌러서 카카오톡 공유하기' onClick='js:kakaoShare("+data+")'/>");
 
-                            const url = msg.documents[0].url
-
-                            console.log(url);
                         } catch (err) {
                             alert("일치하는 결과가 없습니다.");
                             location.reload();
