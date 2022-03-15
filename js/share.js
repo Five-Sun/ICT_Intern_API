@@ -18,7 +18,7 @@ function kakaoShare(data) {
         },
         buttons: [
             {
-                title: '홈페이지 가기',
+                title: '책 정보 보기',
                 link: {
                     mobileWebUrl: shareUrl,
                     webUrl: shareUrl
