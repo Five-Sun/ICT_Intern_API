@@ -15,7 +15,7 @@ function listup() {
             let table_data = "";
             for (var i = 0; i < msg.data.length; i++) {
                 table_data += "<tr>";
-                table_data += "<td>" + msg.data[i].저작물명 + "</td>";
+                table_data += "<td id='"+ msg.data[i].저작물명 +"'>" + msg.data[i].저작물명 + "</td>";
                 table_data += "<td>" + msg.data[i].아티스트명 + "</td>";
                 table_data += "</tr>";
             }

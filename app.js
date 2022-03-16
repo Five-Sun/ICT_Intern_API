@@ -32,7 +32,7 @@ app.get('/data', function(request, response) {
 }); //공공데이터 Open API 활용
 
 app.get('/search', function(request, response) {
-    fs.readFile('search2.html', function(error, data) {
+    fs.readFile('search.html', function(error, data) {
         response.send(data.toString());
     });
 }); //공공데이터 Open API 활용

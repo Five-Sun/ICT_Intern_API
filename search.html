@@ -22,90 +22,11 @@
         </button>
       </div>
     </form>
-    <table style="display: none;" id="table" class="table table-striped">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Thumbnail</th>
-          <th>Visit Channel</th>
-        </tr>
-      </thead>
-      <tbody id="results">
-      </tbody>
-    </table>
     <span id="link">링크</span>
   </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-  crossorigin="anonymous"> //CDN
-  </script>
-<script>
-  $(document).ready(function () {
-    var API_KEY = "";
-    var search = "";
-    var maxResults = 1
-
-    $("#myForm").submit(function (e) {
-      e.preventDefault();
-
-      search = $("#search").val();
-
-      API_KEY = "AIzaSyDQSVysWES54RDYnjZtfbmftS1K6WlBpVQ";
-
-      var url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}
-        &part=snippet&q=${search}&maxResults=${maxResults}&type=video`;
-
-      $.ajax({
-        method: "GET",
-        url: url,
-        beforeSend: function () {
-          $("#btn").attr("disabled", true);
-          $("#results").empty();
-        },
-        success: function (data) {
-          console.log(data);
-          $("#btn").attr("disabled", false);
-          displayVideos(data);
-        },
-      });
-    });
-
-    $("#search").change(function () {
-      search = $("#search").val();
-    });
-
-    function displayVideos(data) {
-      $("#search").val("");
-
-      var videoData = "";
-
-      $("#table").show();
-
-      data.items.forEach((item) => {
-        videoData = `
-                    
-                    <tr>
-                    <td>
-                    <a target="_blank" href="https://www.youtube.com/watch?v=${item.id.videoId}">
-                    ${item.snippet.title}</td>
-                    <td>
-                    <img width="200" height="200" src="${item.snippet.thumbnails.high.url}"/>
-                    </td>
-                    <td>
-                    <a target="_blank" href="https://www.youtube.com/channel/${item.snippet.channelId}">${item.snippet.channelTitle}</a>
-                    </td>
-                    </tr>
-
-                    `;
-
-        $("#results").append(videoData);
-        $("#link").append(`<a target="_blank" href="https://www.youtube.com/watch?v=${item.id.videoId}">` + '<strong>자세히 보기(Click)</strong>'+ '</a>')
-
-      });
-    }
-  });
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="crossorigin="anonymous"> //CDN</script>
+<script src="./js/search.js">
 </script>
 </html >
-
-    http://www.youtube.com/embed/QnAhnxmSNFw
