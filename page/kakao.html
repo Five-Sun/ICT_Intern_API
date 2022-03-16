@@ -144,7 +144,7 @@
                             $("#price").html("<strong>Price: " + msg.documents[0].price + "</strong>");
                             $("#link").html("<a href='" + msg.documents[0].url + "' target='_blank'>" + "<strong>자세히 보기(Click)</strong>" + "</a>");
                             $("#status").html("<strong>Status: " + msg.documents[0].status + "</strong>");
-                            $("#thumbnail").html("<img src='" + msg.documents[0].thumbnail + "' title='눌러서 카카오톡 공유하기' onClick='js:kakaoShare("+data+")'/>");
+                            $("#thumbnail").html("<img src='" + msg.documents[0].thumbnail + "'title='눌러서 카카오톡 공유하기' onClick='js:kakaoShare("+data+")'/>");
 
                         } catch (err) {
                             alert("일치하는 결과가 없습니다.");

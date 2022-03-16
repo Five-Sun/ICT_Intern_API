@@ -33,6 +33,7 @@
       <tbody id="results">
       </tbody>
     </table>
+    <span id="link">링크</span>
   </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -99,6 +100,8 @@
                     `;
 
         $("#results").append(videoData);
+        $("#link").append(`<a target="_blank" href="https://www.youtube.com/watch?v=${item.id.videoId}">` + '<strong>자세히 보기(Click)</strong>'+ '</a>')
+
       });
     }
   });
