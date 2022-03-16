@@ -6,33 +6,27 @@ const app = express();
 //const server = http.createServer(app);
 //웹 서버 생성
 
-app.listen(3000, function() {
+app.listen(3000, function () {
     console.log('server running at http://127.0.0.1:3000');
 });//server 실행
 
-app.use('/js',express.static(__dirname + '/js'))
+app.use('/js', express.static(__dirname + '/js'))//js 파일 경로 설정.
 
-app.get('/', function(request, response) {
-    fs.readFile("./page/main.html", function(error, data) {
-        response.writeHead(200, {"Content-Type" : "text/html"});
+app.get('/', function (request, response) {
+    fs.readFile("./page/main.html", function (error, data) {
+        response.writeHead(200, { "Content-Type": "text/html" });
         response.end(data);
     });
 }); //메인 화면
 
-app.get('/kakao', function(request, response) {
-    fs.readFile('./page/kakao.html', function(error, data) {
+app.get('/kakao', function (request, response) {
+    fs.readFile('./page/kakao.html', function (error, data) {
         response.send(data.toString());
     });
 }); //Kakao Open API 활용
 
-app.get('/data', function(request, response) {
-    fs.readFile('./page/data.html', function(error, data) {
+app.get('/data', function (request, response) {
+    fs.readFile('./page/data.html', function (error, data) {
         response.send(data.toString());
     });
-}); //공공데이터 Open API 활용
-
-app.get('/search', function(request, response) {
-    fs.readFile('search.html', function(error, data) {
-        response.send(data.toString());
-    });
-}); //공공데이터 Open API 활용
+}); //공공데이터 Open API + Youtube API 활용

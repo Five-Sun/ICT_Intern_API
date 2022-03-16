@@ -92,19 +92,16 @@
                     </tr>
                 </thead>
                 <tbody id="table" class="tbody"></tbody>
-            </table>
+            </table> <!--저작물 출력 테이블 화명-->
             <div class="paging">
                 <button id='decrease'>이전</button>
                 <span id='result'></span>
                 <button id='increase'>다음</button>
-            </div>
+            </div> <!--Page 화면-->
             <div class="search-box">
                 <input id="pagenum" value="" type="text" placeholder="page" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
                 <button id="search">Search</button>
-            </div>
-            <span id="link"></span>
-
-
+            </div> <!--Page 검색 화면-->
         </div>
         <div class="footer">
             <strong>Explain</strong>
@@ -115,14 +112,12 @@
             <li>Button을 이용해 변수 page의 값 변경, 그에 따른 table 갱신.</li>
             <li>처음 페이지와 마지막 페이지는 경고문 출력.</li>
             <li>Search를 통해 page 검색, 범위 초과시 경고문 출력 후 새로고침.</li>
-
-
-        </div>
+        </div> <!--간단한 설명-->
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous">
         </script>
-    <script src="../js/listup.js"></script>
-    <script src="../js/search.js"></script>
+    <script src="../js/listup.js"></script> <!--테이블 출력을 하는 js-->
+    <script src="../js/search.js"></script> <!--Youtube 링크를 연결해주는 js-->
 </body>
 </html>

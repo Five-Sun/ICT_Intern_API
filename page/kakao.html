@@ -108,7 +108,7 @@
             <span id="status"></span>
             <span id="link"></span>
 
-        </div>
+        </div> <!--책 정보 출력 화면-->
         <div class="footer">
             <strong>Explain</strong>
             <li>Kakao Open API 중 책 검색 기능을 활용, 다음 책 서비스에서 질의어로 도서 정보를 검색.</li>
@@ -118,12 +118,12 @@
             <li>.append() 사용 시 검색 결과가 쌓이게 되어서 .html()을 사용.</li>
             <li>try-catch문을 사용하여 유효하는 결과값이 없을 경우, 알림창 출력, 새로고침.</li>
             <li>Json객체를 String으로 바꾸어 function의 매개변수로 넣고 공유되는 feed의 내용 수정. </li>
-        </div>
+        </div> <!--간단한 설명-->
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"> //CDN
-    </script>
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous">
+    </script> <!--CDN 추가-->
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script> <!--카카오 SDK 추가-->
     <script>
         $(document).ready(function () {
             $("#search").click(function () {
@@ -157,7 +157,7 @@
     <script>
         Kakao.init('46fb8967b79616210acc50d982ee0ba8');
         console.log(Kakao.isInitialized());
-    </script>
+    </script> <!--카카오 API 설정-->
 </body>
 
 </html>
