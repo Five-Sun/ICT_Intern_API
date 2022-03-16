@@ -1,58 +1,116 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Search</title>
-    <style>
-      span {
-        border: 1px solid black;
-      }
-    </style>
-  </head>
-  <body>
-      <form>
-        <div class="form-group">
-          <input type="text" class="form-control" id="search">
-        </div>
-        <div class="form-group">
-          <input type="submit" value="search">
-        </div>
-      </form>
-        <span class="videos">hi</span>
-        <span class="title">hi</span>
-  </body>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"> //CDN
-    </script>
-  <script>
-    $(document).ready(function() {
-  var API_KEY="AIzaSyDQSVysWES54RDYnjZtfbmftS1K6WlBpVQ";
 
-  $("form").submit(function(event) {
-    event.preventDefault()
+<head>
+  <title>Youtube Video Advanced Search App in Javascript</title>
+</head>
 
-    var search = $("#search").val()
+<body>
+  <div class="container">
+    <br>
+    <h1 class="text-center">
+      Youtube Advanced Search App
+    </h1>
+    <br>
+    <form id="myForm" autocomplete="off">
+      <div class="form-group">
+        <input class="form-control" type="text" id="search" placeholder="Topic" required>
+      </div>
+      <div class="form-group">
+        <button id="btn" class="btn btn-danger btn-block">
+          Search Videos
+        </button>
+      </div>
+    </form>
+    <table style="display: none;" id="table" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Thumbnail</th>
+          <th>Visit Channel</th>
+        </tr>
+      </thead>
+      <tbody id="results">
+      </tbody>
+    </table>
+  </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"> //CDN
+  </script>
+<script>
+  $(document).ready(function () {
+    var API_KEY = "";
+    var search = "";
+    var maxResults = 1
 
-    videoSearch(API_KEY,search,1)
-  })
+    $("#myForm").submit(function (e) {
+      e.preventDefault();
 
-  function videoSearch(key, search, maxResults) {
+      search = $("#search").val();
+
+      //beforedate = new Date($("#beforedate").val()).toISOString();
+
+      //afterdate = new Date($("#beforedate").val()).toISOString();
+
+      API_KEY = "AIzaSyDQSVysWES54RDYnjZtfbmftS1K6WlBpVQ";
+
+      var url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}
+        &part=snippet&q=${search}&maxResults=${maxResults}&type=video`;
+
       $.ajax({
         method: "GET",
-        url: "https://www.googleapis.com/youtube/v3/search?key=" + key
-        + "&type=video&part=snippet&maxResults=" + maxResults + "&q=" + search
-    })
-        .done(function (msg) {
-            console.log(msg);
-            var data = JSON.stringify(msg.items[0]);
-            $("#title").html(msg);
+        url: url,
+        beforeSend: function () {
+          $("#btn").attr("disabled", true);
+          $("#results").empty();
+        },
+        success: function (data) {
+          console.log(data);
+          $("#btn").attr("disabled", false);
+          displayVideos(data);
+        },
+      });
+    });
 
-            $("#videos").html("<a href='http://www.youtube.com/embed/"+ msg.items[0].id.videoId + "' target='_blank' >" + "<strong>자세히 보기(Click)</strong>" + "</a>");
-        });
-  
-    };
-});
-  </script>
-</html>
+    $("#search").change(function () {
+      search = $("#search").val();
+    });
 
-http://www.youtube.com/embed/QnAhnxmSNFw
+    function displayVideos(data) {
+      recPerPage = data.pageInfo.resultsPerPage;
+      nextPageToken = data.nextPageToken;
+      totalRecords = data.pageInfo.totalResults;
+      totalPages = Math.ceil(totalRecords / recPerPage);
+      $("#search").val("");
+
+      var videoData = "";
+
+      $("#table").show();
+
+      data.items.forEach((item) => {
+        videoData = `
+                    
+                    <tr>
+                    <td>
+                    <a target="_blank" href="https://www.youtube.com/watch?v=${item.id.videoId}">
+                    ${item.snippet.title}</td>
+                    <td>
+                    <img width="200" height="200" src="${item.snippet.thumbnails.high.url}"/>
+                    </td>
+                    <td>
+                    <a target="_blank" href="https://www.youtube.com/channel/${item.snippet.channelId}">${item.snippet.channelTitle}</a>
+                    </td>
+                    </tr>
+
+                    `;
+
+        $("#results").append(videoData);
+      });
+    }
+  });
+</script>
+</html >
+
+    http://www.youtube.com/embed/QnAhnxmSNFw
