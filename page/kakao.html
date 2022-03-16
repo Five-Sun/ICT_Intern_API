@@ -103,7 +103,10 @@
                             console.log(msg.documents[0].title);
                             console.log(msg.documents[0].thumbnail);title='눌러서 카카오톡 공유하기'
                             var data = JSON.stringify(msg.documents[0]);
-                            console.log(data);
+                            console.log(data.title);
+                            console.log(data.thumbnail);
+                            console.log(data.contents);
+                            console.log(data.url);
                             $("#title").html("<strong>Title: " + msg.documents[0].title + "</strong>");
                             $("#contents").html("<strong>Contents: " + msg.documents[0].contents + "</strong>");
                             $("#price").html("<strong>Price: " + msg.documents[0].price + "</strong>");
@@ -121,5 +124,4 @@
     </script>
 </body>
 <script src="../public/share.js"></script>
-
 </html>
