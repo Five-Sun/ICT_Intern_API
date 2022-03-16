@@ -3,7 +3,7 @@
 
 <head>
     <title>Open API Exercise</title>
-    <meta http-equiv="Contetn-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Contetn-Type" content="text/html"; charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link href="../public/style.css" rel="stylesheet"/>
     <style>
@@ -59,7 +59,7 @@
         </div>
         <div class="content">
             <div class="search-box">
-                <input id="bookName" value="" type="text">
+                <input id="bookName" value="" type="text" placeholder="책 이름" onKeypress='javascript:if(event.keyCode==13) { $("#search").click()}'>
                 <button id="search">Search</button>
             </div>
             <div id="thumbnail"></div>
@@ -104,6 +104,7 @@
                             console.log(msg.documents[0].title);
                             console.log(msg.documents[0].thumbnail);
                             var data = JSON.stringify(msg.documents[0]);
+                            console.log(data);
                             $("#title").html("<strong>Title: " + msg.documents[0].title + "</strong>");
                             $("#contents").html("<strong>Contents: " + msg.documents[0].contents + "</strong>");
                             $("#price").html("<strong>Price: " + msg.documents[0].price + "</strong>");
@@ -125,6 +126,6 @@
     </script>
     <!--카카오 API 설정-->
 </body>
-<script src="./public/share.js"></script>
+<script src="../public/share.js"></script>
 
 </html>

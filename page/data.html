@@ -3,7 +3,7 @@
 
 <head>
     <title>Open API Exercise</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html"; charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link href="../public/style.css" rel="stylesheet"/>
     <style>
@@ -60,7 +60,9 @@
                 <button id='increase'>다음</button>
             </div> <!--Page 화면-->
             <div class="search-box">
-                <input id="pagenum" value="" type="text" placeholder="page" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/><!--replace로 숫자만 입력-->
+                <input id="pagenum" value="" type="text" placeholder="page" 
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                onKeypress='javascript:if(event.keyCode==13) { $("#search").click()}'/><!--replace로 숫자만 입력-->
                 <button id="search">Search</button>
             </div> <!--Page 검색 화면-->
         </div>
