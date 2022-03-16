@@ -10,7 +10,7 @@ app.listen(3000, function () {
     console.log('server running at http://127.0.0.1:3000');
 });//server 실행
 
-app.use('/js', express.static(__dirname + '/js'))//js 파일 경로 설정.
+app.use('/public', express.static(__dirname + '/public'))//public 폴더 경로 설정.
 
 app.get('/', function (request, response) {
     fs.readFile("./page/main.html", function (error, data) {

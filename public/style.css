@@ -1,0 +1,61 @@
+@charset "utf-8";
+
+body {
+    background-color: #eeeeee;
+    color: #636e72;
+}
+
+a {
+    color: #636e72;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #636e72;
+}
+
+.main-container {
+    width: 60vw;
+    margin: auto;
+    display: grid;
+    grid-template-rows: 20vh 50vh 20vh;
+    row-gap: 1vh;
+}
+
+.header {
+    font-size: 2vw;
+    text-align: center;
+    margin: 0;
+}
+
+.content {
+    border-top: 1px solid black;
+
+}
+
+.footer {
+    border-top: 1px solid black;
+    text-align: left;
+    font-size: 1vw;
+}
+
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    float: right;
+    width: 25vw;
+    height: 20vh;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    width: 60vw;
+    height: 20vh;
+    margin-bottom: 1vh;
+}
+
