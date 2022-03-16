@@ -13,7 +13,7 @@ function kakaoShare(data) {
             imageUrl: shareImage,
             link: {
                 mobileWebUrl: shareUrl,
-                webUrl:shareUrl 
+                webUrl: shareUrl
             },
         },
         buttons: [
@@ -26,4 +26,4 @@ function kakaoShare(data) {
             }
         ]
     });
-}
+} //카카오톡 공유하기 API 내용에 맞게 매개변수로 해당 정보의 객체를 받아 내용물로 지정

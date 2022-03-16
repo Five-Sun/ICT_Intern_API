@@ -19,35 +19,35 @@ function listup() {
                 arr1[i] = JSON.stringify(msg.data[i].저작물명);
                 arr2[i] = JSON.stringify(msg.data[i].아티스트명);
                 table_data += "<tr>";
-                table_data += "<td id='" + msg.data[i].저작물명 + "' onClick='js:getYoutube("+ arr1[i] +"," + arr2[i]+")'>" + msg.data[i].저작물명 + "</td>";
+                table_data += "<td id='" + msg.data[i].저작물명 + "' onClick='js:getYoutube(" + arr1[i] + "," + arr2[i] + ")'>" + msg.data[i].저작물명 + "</td>";
                 table_data += "<td>" + msg.data[i].아티스트명 + "</td>";
                 table_data += "</tr>";
             }
             $('#table').html(table_data)
         });
 
-}
+} //저작물 테이블을 생성해주는 함수
 $(document).ready(function () {
     listup();
 
     $('#increase').click(function () {
         page = parseInt(page) + 1;
         if (page > 114) {
-            page = 114;
+            page = parseInt(page) - 1;
             alert("데이터 없음");
         }
         console.log(page);
         listup();
-    });
+    }); //다음 페이지의 테이블을 가져오는 기능
     $('#decrease').click(function () {
         page = parseInt(page) - 1;
         if (page < 1) {
             page = parseInt(page) + 1;
-            alert("데이터 없음");
+            alert("데이터 없음"); 
         }
         console.log(page);
         listup();
-    });
+    }); //이전 페이지의 테이블을 가져오는 기능
 
     $("#search").click(function () {
         page = document.getElementById('pagenum').value;
@@ -57,6 +57,5 @@ $(document).ready(function () {
         }
         console.log(page);
         listup();
-    });
+    }); //검색한 페이지의 테이블을 가져오는 기능
 });
-

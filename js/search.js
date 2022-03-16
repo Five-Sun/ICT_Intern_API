@@ -25,7 +25,7 @@ function getYoutube(title, artist) {
 
     function goYoutube(data) {
         data.items.forEach((item) => {
-            window.location.href =`https://www.youtube.com/watch?v=${item.id.videoId}>`;
+            window.location.href = `https://www.youtube.com/watch?v=${item.id.videoId}>`;
         });
     }
-}
+} //Youtube API를 통해 해당 링크로 연결해주는 함수, 매개변수로 저작물명과 아티스트명을 받아 검색어로 설정하고 그에 해당하는 videoID를 이용해 페이지 이동
