@@ -3,12 +3,7 @@ console.log(Kakao.isInitialized());
 
 //카카오 API 설정
 
-function kakaoShare(data) {
-
-    const shareImage = data.thumbnail;
-    const shareTitle = data.title;
-    const shareDes = data.contents;
-    const shareUrl = data.url;
+function kakaoShare(shareImage, shareTitle, shareDes, shareUrl) {
 
     Kakao.Link.sendDefault({
         objectType: 'feed',

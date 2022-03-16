@@ -99,20 +99,24 @@
                 })
                     .done(function (msg) {
                         try {
-                            console.log(msg);
-                            console.log(msg.documents[0].title);
+                            //console.log(msg);
+                            //console.log(msg.documents[0].title);
                             console.log(msg.documents[0].thumbnail);title='눌러서 카카오톡 공유하기'
-                            var data = JSON.stringify(msg.documents[0]);
-                            console.log(data.title);
-                            console.log(data.thumbnail);
-                            console.log(data.contents);
-                            console.log(data.url);
+                            var Image = JSON.stringify(msg.documents[0].thumbnail);
+                            var Title = JSON.stringify(msg.documents[0].title);
+                            var Des = JSON.stringify(msg.documents[0].contents);
+                            var Url = JSON.stringify(msg.documents[0].url);
+                            var Des = Des.replace(/'/gi, " ");
+                            console.log(Image);
+                            console.log(Title);
+                            console.log(Des);
+                            console.log(Url);
                             $("#title").html("<strong>Title: " + msg.documents[0].title + "</strong>");
                             $("#contents").html("<strong>Contents: " + msg.documents[0].contents + "</strong>");
                             $("#price").html("<strong>Price: " + msg.documents[0].price + "</strong>");
                             $("#link").html("<a href='" + msg.documents[0].url + "' target='_blank'>" + "<strong>자세히 보기(Click)</strong>" + "</a>");
                             $("#status").html("<strong>Status: " + msg.documents[0].status + "</strong>");
-                            $("#thumbnail").html("<img src='" + msg.documents[0].thumbnail + "' onClick='js:kakaoShare(" + data + ")'/>");
+                            $("#thumbnail").html("<img src='" + msg.documents[0].thumbnail + "' onClick='js:kakaoShare(" + Image + "," + Title + "," + Des + "," + Url + ")'/>");
 
                         } catch (err) {
                             alert("일치하는 결과가 없습니다.");
