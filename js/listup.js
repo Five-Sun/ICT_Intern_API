@@ -14,8 +14,12 @@ function listup() {
             console.log(msg.data.length);
             let table_data = "";
             for (var i = 0; i < msg.data.length; i++) {
+                var arr1 = [];
+                var arr2 = [];
+                arr1[i] = JSON.stringify(msg.data[i].저작물명);
+                arr2[i] = JSON.stringify(msg.data[i].아티스트명);
                 table_data += "<tr>";
-                table_data += "<td id='"+ msg.data[i].저작물명 +"'>" + msg.data[i].저작물명 + "</td>";
+                table_data += "<td id='" + msg.data[i].저작물명 + "' onClick='js:getYoutube("+ arr1[i] +"," + arr2[i]+")'>" + msg.data[i].저작물명 + "</td>";
                 table_data += "<td>" + msg.data[i].아티스트명 + "</td>";
                 table_data += "</tr>";
             }
@@ -55,3 +59,4 @@ $(document).ready(function () {
         listup();
     });
 });
+
