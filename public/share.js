@@ -1,3 +1,8 @@
+Kakao.init('46fb8967b79616210acc50d982ee0ba8');
+console.log(Kakao.isInitialized());
+
+//카카오 API 설정
+
 function kakaoShare(data) {
 
     const shareImage = data.thumbnail;
@@ -12,7 +17,6 @@ function kakaoShare(data) {
             description: shareDes,
             imageUrl: shareImage,
             link: {
-                mobileWebUrl: shareUrl,
                 webUrl: shareUrl
             },
         },
@@ -20,7 +24,6 @@ function kakaoShare(data) {
             {
                 title: '책 정보 보기',
                 link: {
-                    mobileWebUrl: shareUrl,
                    webUrl: shareUrl
                 },
             },
