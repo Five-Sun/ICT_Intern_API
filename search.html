@@ -50,10 +50,6 @@
 
       search = $("#search").val();
 
-      //beforedate = new Date($("#beforedate").val()).toISOString();
-
-      //afterdate = new Date($("#beforedate").val()).toISOString();
-
       API_KEY = "AIzaSyDQSVysWES54RDYnjZtfbmftS1K6WlBpVQ";
 
       var url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}
@@ -79,10 +75,6 @@
     });
 
     function displayVideos(data) {
-      recPerPage = data.pageInfo.resultsPerPage;
-      nextPageToken = data.nextPageToken;
-      totalRecords = data.pageInfo.totalResults;
-      totalPages = Math.ceil(totalRecords / recPerPage);
       $("#search").val("");
 
       var videoData = "";
