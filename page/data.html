@@ -9,6 +9,7 @@
     <style>
         .table {
             width: 60vw;
+            height: 40vh;
             text-align: center;
             font-size: 0.8vw;
         }
@@ -23,6 +24,9 @@
 
         .paging {
             text-align: center;
+            margin-bottom: 0.5vw;
+            width: 60vw;
+            height: 5vh;
         }
 
         button {
@@ -64,10 +68,10 @@
                 <button id='increase'>다음</button>
             </div> <!--Page 화면-->
             <div class="search-box">
-                <input id="pagenum" value="" type="text" placeholder="page" 
+                <input id="pagenum" value="" type="text" placeholder="page" style="width: 10vw;"
                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                 onKeypress='javascript:if(event.keyCode==13) { $("#search").click()}'/><!--replace로 숫자만 입력-->
-                <button id="search">Search</button>
+                <button id="search" style="width: 5vw; font-size: 0.25vw;">Search</button>
             </div> <!--Page 검색 화면-->
         </div>
         <div class="footer">
