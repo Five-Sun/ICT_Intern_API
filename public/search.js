@@ -13,12 +13,9 @@ function getYoutube(title, artist) {
         method: "GET",
         url: url,
         beforeSend: function () {
-            $("#btn").attr("disabled", true);
-            $("#results").empty();
         },
         success: function (data) {
             console.log(data);
-            $("#btn").attr("disabled", false);
             goYoutube(data);
         },
     });

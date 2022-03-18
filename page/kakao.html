@@ -107,6 +107,7 @@
                             var Des = JSON.stringify(msg.documents[0].contents);
                             var Url = JSON.stringify(msg.documents[0].url);
                             var Des = Des.replace(/'/gi, " ");
+                            var Des = Des.replace(/"/gi, " ");
                             console.log(Image);
                             console.log(Title);
                             console.log(Des);
