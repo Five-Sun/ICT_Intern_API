@@ -1,4 +1,4 @@
-Kakao.init('46fb8967b79616210acc50d982ee0ba8');
+Kakao.init('Kakao_개인키');
 console.log(Kakao.isInitialized());
 
 //카카오 API 설정
