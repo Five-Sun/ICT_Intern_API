@@ -3,7 +3,7 @@ var page = 1;
 function listup() {
     document.getElementById("result").innerHTML = page + "쪽";
     var url = "https://api.odcloud.kr/api/15071046/v1/uddi:abe42915-3cb5-477d-8d53-b7430e5567f0";
-    var key = '?' + 'page=' + page + '&perPage=15&' + encodeURIComponent('serviceKey') + '=BpVkp8tRMvruN%2B9MjZ3x5M%2F%2BHLfC1sBr1cwsdHz002xQg9r04V4z4hR1TdTlTr9acG0%2B7OvJtVinbbZ3hCC1cQ%3D%3D'; /* Service Key*/
+    var key = '?' + 'page=' + page + '&perPage=15&' + encodeURIComponent('serviceKey') + '=공공데이터_개인키'; /* Service Key*/
 
     $.ajax({
         method: "GET",
