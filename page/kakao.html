@@ -95,7 +95,7 @@
                     method: "GET",
                     url: "https://dapi.kakao.com/v3/search/book?target=title",
                     data: { query: $("#bookName").val() },
-                    headers: { Authorization: "KakaoAK 3705e65d3da8505380bbd2d83e4a085f" }
+                    headers: { Authorization: "Kakao_개인키" }
                 })
                     .done(function (msg) {
                         try {
