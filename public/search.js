@@ -4,7 +4,7 @@ function getYoutube(title, artist) {
     var maxResults = 1
 
 
-    API_KEY = "AIzaSyDQSVysWES54RDYnjZtfbmftS1K6WlBpVQ";
+    API_KEY = "API_개인키";
 
     var url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}
           &part=snippet&q=${search}&maxResults=${maxResults}&type=video`;
