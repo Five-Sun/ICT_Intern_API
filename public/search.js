@@ -12,8 +12,6 @@ function getYoutube(title, artist) {
     $.ajax({
         method: "GET",
         url: url,
-        beforeSend: function () {
-        },
         success: function (data) {
             console.log(data);
             goYoutube(data);
